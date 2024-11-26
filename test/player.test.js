@@ -1,4 +1,4 @@
-const player = require('../src/player');
+const player = require('../src/Player');
 
 test("The player class exists", () => {
     expect(player).toBeDefined();
