@@ -15,3 +15,10 @@ test("The Card class has a rank from the rank_type", () => {
     expect(() => card.setRank('Bubble')).toThrow("Invalid input type");
 });
 
+test("The card has no value", () => {
+    const card = new Card();
+    card.setSuit('Hearts');
+    card.setRank('Ace');
+    expect(card.getValue()).toBe(10);
+})
+
