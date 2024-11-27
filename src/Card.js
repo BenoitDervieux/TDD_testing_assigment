@@ -9,8 +9,8 @@ class Card {
         return this.#suit;
     }
     setSuit(suit) {
-        if(this.#isFromTheSuiteType(suit) === true) {
-            this.#suit = suit;
+        if(this.#isFromTheSuiteType(suit.toLowerCase()) === true) {
+            this.#suit = suit.toLowerCase();
         } else {
             throw new Error('Invalid input type');
         }  
