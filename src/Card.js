@@ -30,7 +30,10 @@ class Card {
 
     getValue() {
         return this.#calculateValue(this.#rank);
+    }
 
+    getStringRepresentation() {
+        return this.#firstCharUpperCase(this.#rank) + ' of ' + this.#firstCharUpperCase(this.#suit);
     }
 
     #isFromTheSuiteType(suit_given) {
@@ -43,6 +46,13 @@ class Card {
 
     #calculateValue(rank) {
         return (Rank_types.indexOf(rank) + 1 < 11) ? Rank_types.indexOf(rank) + 1 : 11 ;
+    }
+    #firstCharUpperCase(word) {
+        const firstLetter = word.charAt(0);
+        const firstLetterCap = firstLetter.toUpperCase();
+        const remainingLetters = word.slice(1);
+        const capitalizedWord = firstLetterCap + remainingLetters;
+        return capitalizedWord;
     }
 
 }

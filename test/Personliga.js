@@ -5,10 +5,14 @@ const Card = require("../src/Card")
 const card = new Card();
 
 card.setRank('Ace');
+card.setSuit("Hearts")
 
-
-function calculateValue(rank) {
-    return Rank_types.indexOf(rank) + 1;
+function firstCharUpperCase(word) {
+    const firstLetter = word.charAt(0);
+    const firstLetterCap = firstLetter.toUpperCase();
+    const remainingLetters = word.slice(1);
+    const capitalizedWord = firstLetterCap + remainingLetters;
+    return capitalizedWord;
 }
 
-console.log(card.getValue());
+console.log(card.getStringRepresentation())

@@ -34,3 +34,10 @@ test("The card has no value", () => {
     expect(card.getValue()).toBe(11);
 })
 
+test("The card has a string representation", () => {
+    const card = new Card();
+    card.setSuit('Hearts');
+    card.setRank('Ace');
+    expect(card.getStringRepresentation()).toBe('Ace of Hearts');
+})
+
