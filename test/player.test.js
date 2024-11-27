@@ -7,8 +7,9 @@ test("The classes exists", () => {
     expect(new Player()).toBeInstanceOf(Player);
     expect(new Dealer()).toBeInstanceOf(Dealer);
     expect(new Card()).toBeInstanceOf(Card);
-});
-
-test("The Deck class exists", () => {
     expect(new Deck()).toBeInstanceOf(Deck);
 });
+
+test("The game class is created", () => {
+    expect(new Game()).toBeInstanceOf(Game);
+})
