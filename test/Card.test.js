@@ -11,8 +11,7 @@ test("The Card class has a suit that should be from the suit_type", () => {
     const card = new Card();
     card.setSuit('hearts');
     expect(isFromTheSuiteType(card.getSuit())).toBe(true);
-    card.setSuit('Bubble');
-    expect(isFromTheSuiteType(card.getSuit())).toBe(false);
+    expect(card.setSuit('Bubble')).toThrow("Invalid input type");
 });
 
 function isFromTheSuiteType(suit_given) {
