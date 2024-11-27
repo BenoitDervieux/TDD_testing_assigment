@@ -1,4 +1,5 @@
 const Player = require('../src/Player');
+const Dealer = require('../src/Dealer');
 
 test("The player class exists", () => {
     expect(new Player()).toBeInstanceOf(Player);
