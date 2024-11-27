@@ -1,17 +1,17 @@
 const Rank_types = [
-    "Ace",
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Ten",
-    "Jack",
-    "Queen",
-    "King"
+    "ace",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten",
+    "jack",
+    "queen",
+    "king"
 ]
 
 module.exports = Rank_types

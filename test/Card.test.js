@@ -8,9 +8,10 @@ test("The Card class has a suit from the suit_type", () => {
     expect(() => card.setSuit('Bubble')).toThrow("Invalid input type");
 });
 
-// test("The Card class has a suit from the suit_type", () => {
-//     const card = new Card();
-//     card.setRank('Ace');
-//     expect(card.getSuit()).toBe('Ace');
-// });
+test("The Card class has a rank from the rank_type", () => {
+    const card = new Card();
+    card.setRank('Ace');
+    expect(card.getRank()).toBe('ace');
+    expect(() => card.setRank('Bubble')).toThrow("Invalid input type");
+});
 
