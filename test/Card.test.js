@@ -19,6 +19,18 @@ test("The card has no value", () => {
     const card = new Card();
     card.setSuit('Hearts');
     card.setRank('Ace');
+    expect(card.getValue()).toBe(1);
+    card.setRank('Two');
+    expect(card.getValue()).toBe(2);
+    card.setRank('Eight');
+    expect(card.getValue()).toBe(8);
+    card.setRank('Ten');
     expect(card.getValue()).toBe(10);
+    card.setRank('Jack');
+    expect(card.getValue()).toBe(11);
+    card.setRank('Queen');
+    expect(card.getValue()).toBe(11);
+    card.setRank('King');
+    expect(card.getValue()).toBe(11);
 })
 

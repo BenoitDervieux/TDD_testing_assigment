@@ -28,12 +28,21 @@ class Card {
         }  
     }
 
+    getValue() {
+        return this.#calculateValue(this.#rank);
+
+    }
+
     #isFromTheSuiteType(suit_given) {
         return Object.values(Suit_types).includes(suit_given);
     }
 
     #isFromTheRankType(rank_given) {
         return Object.values(Rank_types).includes(rank_given);
+    }
+
+    #calculateValue(rank) {
+        return (Rank_types.indexOf(rank) + 1 < 11) ? Rank_types.indexOf(rank) + 1 : 11 ;
     }
 
 }
