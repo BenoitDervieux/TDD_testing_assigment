@@ -1,4 +1,5 @@
 const Suit_types = require("./Suit_types")
+const WrongInputException = require("./WrongInputException")
 class Card {
     #suit = '';
     #rank = '';
@@ -9,10 +10,20 @@ class Card {
         return this.#suit;
     }
     setSuit(suit) {
-        this.#suit = suit;
+        if(this.#isFromTheSuiteType(suit) === true) {
+            this.#suit = suit;
+        } else {
+            throw new Error('Invalid input type');
+            // throw new WrongInputException();
+        }  
+    }
+
+    #isFromTheSuiteType(suit_given) {
+        return Object.values(Suit_types).includes(suit_given);
     }
 
 
 }
 
-  module.exports = Card;
+module.exports = Card;
+

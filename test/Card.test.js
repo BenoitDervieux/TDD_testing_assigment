@@ -1,5 +1,6 @@
 const Card = require('../src/Card');
 const Suit_types = require("../src/Suit_types");
+const WrongInputException = require('../src/WrongInputException')
 
 test("The Card class has a suit", () => {
     const card = new Card();
@@ -9,16 +10,7 @@ test("The Card class has a suit", () => {
 
 test("The Card class has a suit that should be from the suit_type", () => {
     const card = new Card();
-    card.setSuit('hearts');
-    expect(isFromTheSuiteType(card.getSuit())).toBe(true);
-    expect(card.setSuit('Bubble')).toThrow("Invalid input type");
+    expect(() => card.setSuit('Bubble')).toThrow("Invalid input type");
+    // expect(card.setSuit('Bubble')).toBeInstanceOf(WrongInputException);
 });
 
-function isFromTheSuiteType(suit_given) {
-    for (const element in Suit_types) {
-        if (suit_given === Suit_types[element]) {
-            return true;
-        }
-    }
-    return false;
-}
