@@ -1,3 +1,4 @@
+const Suit_types = require("./Suit_types")
 class Card {
     #suit = '';
     #rank = '';
