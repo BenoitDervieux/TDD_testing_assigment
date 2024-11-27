@@ -1,9 +1,6 @@
-const player = require('../src/Player');
+const Player = require('../src/Player');
 
 test("The player class exists", () => {
-    expect(player).toBeDefined();
-});
-
-test("The dealer class exists", () => {
-    expect(dealer).toBeDefined();
+    let player = new Player();
+    expect(player).toBeInstanceOf(Player);
 });
