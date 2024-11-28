@@ -11,5 +11,5 @@ test("The hand class can add cards", () => {
     const card = new Card();
     card.setRank('Ace');
     card.setSuit('hearts');
-    expect(hand.add(card)).toBe(true);
+    expect(hand.addCard(card)).toBe(true);
 })
