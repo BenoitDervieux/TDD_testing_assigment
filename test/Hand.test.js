@@ -15,3 +15,12 @@ test("The hand class has a soft attribute", () => {
     const hand = new Hand();
     expect(hand.getSoft()).toBe(false);
 });
+
+test("The hand class can calculate a soft", () => {
+    const hand = new Hand();
+    const card = new Card();
+    card.setRank('Ace');
+    card.setSuit('hearts');
+    hand.addCard(card)
+    expect(hand.getSoft()).toBe(true);
+});
