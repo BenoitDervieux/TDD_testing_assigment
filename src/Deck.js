@@ -23,6 +23,13 @@ class Deck {
     }
     return this._cards.pop();
   }
+
+  shuffle() {
+    for (let i = 0; i < 1024; i++) {
+      const card = this._cards.shift()
+      this._cards.splice(Math.floor(Math.random()*this._cards.length), 0, card);
+    }
+  }
 }
 
   module.exports = Deck;

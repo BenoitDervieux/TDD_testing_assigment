@@ -20,20 +20,28 @@ test("It is possible to draw card from the deck and atempting to get a card from
 test("The deck shuffle has a method to shuffle the cards", () => {
     const deck = new DeckStub();
     const cards_array_1 = deck.getCards();
+    let result = cardsAreRandom(cards_array_1);
+    expect(result).toBe(false);
     deck.shuffle();
-    const cards_array_2 = deck.getCards();
-    expect(() => twoDifferentArrays(cards_array_1, cards_array_2)).toBe(true);
+    result = cardsAreRandom(cards_array_1);
+    expect(result).toBe(true);
+    
 })
 
-function twoDifferentArrays(array1, array2) {
+function cardsAreRandom(cards) {
     // consider that the two arrays are different if they are at least 50%+ of their content
     // which is not at the same place
-    const size = (array1.length < array2.length) ? array1.length : array2.length;
+    const size = cards.length;
     let errors = 0;
-    for (let i = 0; i < size; i++) {
-        if (array1[i] === array2[i]) {
+    for (let i = 1; i < cards.length; i++) {
+        if (cards[i].getValue() === 11 && cards[i-1].getValue() === 11){
             errors++;
-        }
+        } else if (cards[i].getValue() === 1 && cards[i-1].getValue() === 11) {
+            errors++;
+        } else if (cards[i].getValue() === (cards[i-1].getValue() + 1)) {
+            errors++;
+        }    
     }
+    // console.log("The cards length" + Math.round(errors/size))
     return !Boolean(Math.round(errors/size));
 }
