@@ -1,5 +1,5 @@
 const Deck = require('../src/Deck');
-const Deck_stub = require('../src/Deck_stub');
+const DeckStub = require('../src/DeckStub');
 const Card = require('../src/Card');
 
 
@@ -18,7 +18,7 @@ test("It is possible to draw card from the deck and atempting to get a card from
 })
 
 test("The deck shuffle has a method to shuffle the cards", () => {
-    const deck = new Deck_stub();
+    const deck = new DeckStub();
     const cards_array_1 = deck.getCards();
     deck.shuffle();
     const cards_array_2 = deck.getCards();
@@ -35,5 +35,5 @@ function twoDifferentArrays(array1, array2) {
             errors++;
         }
     }
-    return Boolean(Math.round(errors/size));
+    return !Boolean(Math.round(errors/size));
 }

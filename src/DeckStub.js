@@ -1,6 +1,6 @@
 const Deck = require('./Deck');
 
-class Deck_stub extends Deck {
+class DeckStub extends Deck {
     constructor() {
         super();
     }
@@ -9,3 +9,5 @@ class Deck_stub extends Deck {
         return this._cards;
     }
 }
+
+module.exports = DeckStub;
