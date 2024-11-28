@@ -11,3 +11,8 @@ test("The classes exists", () => {
     expect(new Deck()).toBeInstanceOf(Deck);
     expect(new Game()).toBeInstanceOf(Game);
 });
+
+test("The hand class exists", () => {
+    const hand = new Hand();
+    expect(hand).toBeInstanceOf(Hand);
+    });

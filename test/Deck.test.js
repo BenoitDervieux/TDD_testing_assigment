@@ -24,8 +24,7 @@ test("The deck shuffle has a method to shuffle the cards", () => {
     expect(result).toBe(false);
     deck.shuffle();
     result = cardsAreRandom(cards_array_1);
-    expect(result).toBe(true);
-    
+    expect(result).toBe(true); 
 })
 
 function cardsAreRandom(cards) {
