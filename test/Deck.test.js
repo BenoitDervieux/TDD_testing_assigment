@@ -19,5 +19,5 @@ test("Getting card from an empty array should throw an error", () => {
         const card = deck.draw_card();
         expect(card).toBeInstanceOf(Card);
     }
-    expect(deck.draw_card()).toThrow(Error);    
+    expect(() => deck.draw_card()).toThrow('No cards left in the deck');
 })

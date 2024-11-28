@@ -18,7 +18,11 @@ class Deck {
   }
 
   draw_card() {
-
+    if (this.#cards.length === 0) {
+      throw new Error('No cards left in the deck');
+    }
+    return this.#cards.pop();
+  }
 }
 
   module.exports = Deck;
