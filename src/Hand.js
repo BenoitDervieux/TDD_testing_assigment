@@ -1,5 +1,6 @@
 class Hand {
     #cards = [];
+    #soft = false;
     constructor() {
     }
 
@@ -10,6 +11,10 @@ class Hand {
     addCard(card) {
         this.#cards.push(card);
         return true;
+    }
+
+    getSoft() {
+        return this.#soft;
     }
 }
 
