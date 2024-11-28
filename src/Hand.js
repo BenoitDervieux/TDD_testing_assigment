@@ -10,6 +10,9 @@ class Hand {
 
     addCard(card) {
         this.#cards.push(card);
+        if (card.getValue() === 1) {
+            this.#soft = true;
+        }
         return true;
     }
 
