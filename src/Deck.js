@@ -18,8 +18,7 @@ class Deck {
   }
 
   draw_card() {
-    return this.#cards.pop();
-  }
+
 }
 
   module.exports = Deck;
