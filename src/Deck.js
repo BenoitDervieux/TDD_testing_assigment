@@ -16,6 +16,10 @@ class Deck {
   getNumberOfCards() {
     return this.#cards.length;
   }
+
+  draw_card() {
+    return this.#cards.pop();
+  }
 }
 
   module.exports = Deck;
