@@ -10,3 +10,8 @@ test("The hand class can add cards and get them", () => {
     expect(hand.addCard(card)).toBe(true);
     expect(hand.getCards().length).toBe(1);
 })
+
+test("The hand class has a soft attribute", () => {
+    const hand = new Hand();
+    expect(hand.getSoft()).toBe(false);
+});
