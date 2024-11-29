@@ -29,3 +29,12 @@ test("The hand class can calculate a soft", () => {
     hand.addCard(card2)
     expect(hand.getSoft()).toBe(true);
 });
+
+test("the hand class can calculate the value of 1 cards with no ace", () => {
+    const hand = new Hand();
+    const card1 = new Card();
+    card1.setRank('Two');
+    card1.setSuit('hearts');
+    hand.addCard(card1)
+    expect(hand.getValue()).toBe(2);
+})
