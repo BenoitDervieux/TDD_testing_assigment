@@ -10,8 +10,12 @@ class Hand {
 
     addCard(card) {
         this.#cards.push(card);
-        if (card.getValue() === 1) {
-            this.#soft = true;
+        for (const card of this.#cards) {
+            if (card.getValue() === 1) {
+                this.#soft = true;
+            } else {
+                this.#soft = false;
+            }
         }
         return true;
     }
@@ -29,7 +33,10 @@ class Hand {
                 sum += card.getValue();
             }
         }
-        return sum;
+        if (sum > 21 && this.#soft) {
+            sum -= 10;
+        }
+        return sum ;
     }
 }
 
