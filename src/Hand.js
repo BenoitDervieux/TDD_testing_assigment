@@ -19,6 +19,14 @@ class Hand {
     getSoft() {
         return this.#soft;
     }
+
+    getValue() {
+        let sum = 0;
+        for (const card of this.#cards) {
+            sum += card.getValue();
+        }
+        return sum;
+    }
 }
 
   module.exports = Hand;
