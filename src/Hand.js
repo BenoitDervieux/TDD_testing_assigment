@@ -23,9 +23,9 @@ class Hand {
     getValue() {
         let sum = 0;
         for (const card of this.#cards) {
-            return sum += card.getValue();
+            sum += card.getValue();
         }
-        // return sum;
+        return sum;
     }
 }
 
