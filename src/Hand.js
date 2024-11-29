@@ -23,7 +23,11 @@ class Hand {
     getValue() {
         let sum = 0;
         for (const card of this.#cards) {
-            sum += card.getValue();
+            if (card.getValue() === 1) {
+                sum += 11;
+            } else {
+                sum += card.getValue();
+            }
         }
         return sum;
     }
