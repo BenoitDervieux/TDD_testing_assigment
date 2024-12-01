@@ -2,6 +2,7 @@ const Player = require('../src/Player');
 const HandStub = require('../src/HandStub');
 const Hand = require('../src/Hand');
 const States = require('../src/States_types');
+const Strategy = require('../src/Strategy_types');
 
 
 test("The player has a name, a budget and a hand", () => {
@@ -14,7 +15,7 @@ test("The player has a name, a budget and a hand", () => {
 
 
 
-test("The player has a state", () => {
+test("The player has a state and throws an exception for bad states", () => {
     const player = new Player();
     player.setState(States.PLAYING);
     expect(player.getState()).toBe("playing")
@@ -35,4 +36,11 @@ test("The player has a state", () => {
     player.setState(States.BETTING);
     expect(player.getState()).toBe("betting")
     expect(() =>player.setState("unvalid state")).toThrow('Invalid state');
+})
+
+test("The player has a strategy", () => {
+    const player = new Player();
+    player.setStrategy(Strategy.ALWAYS_HIT_ON_8);
+    expect(player.getStrategy()).toBe("Always hit on 8")
+    // expect(() =>player.setState("unvalid state")).toThrow('Invalid state');
 })
