@@ -10,3 +10,10 @@ test("The player has a name, a budget and a hand", () => {
     expect(player.getBudget()).toBe(100);
     expect(player.getHand()).toBeInstanceOf(Hand);
 })
+
+
+
+test("The player has a state", () => {
+    const player = new Player();
+    expect(player.getState()).toBe("playing")
+})

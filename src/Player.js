@@ -4,6 +4,7 @@ class Player {
     #name ="";
     #budget;
     #hand;
+    #state;
     constructor() {
       this.#budget = 100;
       this.#hand = new Hand();
@@ -19,6 +20,12 @@ class Player {
     }
     getHand() {
         return this.#hand;
+    }
+    getState() {
+        return this.#state;
+    }
+    setState(state) {
+        this.#state = state;
     }
 
 
