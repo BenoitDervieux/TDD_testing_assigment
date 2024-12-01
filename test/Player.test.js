@@ -4,6 +4,7 @@ const HandStub = require('../src/HandStub');
 const Hand = require('../src/Hand');
 const States = require('../src/States_types');
 const Strategy = require('../src/Strategy_types');
+const Card = require('../src/Card');
 
 
 test("The player has a name, a budget and a hand", () => {
@@ -51,9 +52,9 @@ test("The player can hit()", () => {
     const card = new Card();
     card.setSuit('Hearts');
     card.setRank('Queen');
-    expect(playerStub.getHand().getCards().length).toBe(2);
+    playerStub.getHand().addCard(card);
+    expect(playerStub.getHand().getCards().length).toBe(1);
     playerStub.hit();
     expect(playerStub.getHand().getCards().length).toBe(2);
-
     
 })

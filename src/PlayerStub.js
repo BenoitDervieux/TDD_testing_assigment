@@ -1,5 +1,6 @@
 const Player = require('./Player');
 const HandStub = require('./HandStub');
+const Card = require('../src/Card');
 
 class PlayerStub extends Player {
     handStub;
@@ -21,10 +22,12 @@ class PlayerStub extends Player {
         return this.handStub.getValue();
     }
 
-    // hit() {
-    //     const card = new Card();
-    //     card.setSuit('Hearts');
-    //     card.setRank('Queen');
-    //     this.handStub.addCard(card);
-    // }
+    hit() {
+        const card = new Card();
+        card.setSuit('Hearts');
+        card.setRank('Queen');
+        this.handStub.addCard(card);
+    }
 }
+
+module.exports = PlayerStub;
