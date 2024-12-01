@@ -1,6 +1,8 @@
 class Player {
     #name ="";
+    #budget;
     constructor() {
+      this.#budget = 100;
     }
     getName() {
         return this.#name;
@@ -8,6 +10,11 @@ class Player {
     setName(name) {
         this.#name = name;
     }
+    getBudget() {
+        return this.#budget;
+    }
+
+
 }
 
 
