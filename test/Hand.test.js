@@ -65,7 +65,7 @@ test("the hand class can calculate the value of 2 cards with an ace and a card l
     expect(hand.getValue()).toBe(21);
 })
 
-test("the hand class can calculate the value of 2 cards with an ace and a card equal to 11", () => {
+test("the hand class can calculate the value of 3 cards with two ace and a card equal to 11", () => {
     const hand = new Hand();
     const card1 = new Card();
     card1.setRank('Queen');
@@ -75,5 +75,9 @@ test("the hand class can calculate the value of 2 cards with an ace and a card e
     card2.setRank('Ace');
     card2.setSuit('hearts');
     hand.addCard(card2)
-    expect(hand.getValue()).toBe(12);
+    const card3 = new Card();
+    card3.setRank('Ace');
+    card3.setSuit('diamonds');
+    hand.addCard(card3)
+    expect(hand.getValue()).toBe(23);
 })
