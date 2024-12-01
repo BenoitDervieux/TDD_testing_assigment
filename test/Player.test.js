@@ -1,4 +1,5 @@
 const Player = require('../src/Player');
+const PlayerStub = require('../src/PlayerStub');
 const HandStub = require('../src/HandStub');
 const Hand = require('../src/Hand');
 const States = require('../src/States_types');
@@ -38,9 +39,21 @@ test("The player has a state and throws an exception for bad states", () => {
     expect(() =>player.setState("unvalid state")).toThrow('Invalid state');
 })
 
-test("The player has a strategy", () => {
+test("The player has a strategy and throws error when invalid strategy", () => {
     const player = new Player();
     player.setStrategy(Strategy.ALWAYS_HIT_ON_8);
     expect(player.getStrategy()).toBe("Always hit on 8")
-    /expect(() =>player.setStrategy("invalid strategy")).toThrow('Invalid strategy');
+    expect(() => player.setStrategy("bad strategy")).toThrow('Invalid strategy');
+})
+
+test("The player can hit()", () => {
+    const playerStub = new PlayerStub();
+    const card = new Card();
+    card.setSuit('Hearts');
+    card.setRank('Queen');
+    expect(playerStub.getHand().getCards().length).toBe(2);
+    playerStub.hit();
+    expect(playerStub.getHand().getCards().length).toBe(2);
+
+    
 })

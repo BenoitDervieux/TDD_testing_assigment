@@ -67,7 +67,7 @@ class Player {
         return this.#strategy;
     }
     setStrategy(strategy) {
-      switch (state) {
+      switch (strategy) {
         case Strategy.ALWAYS_HIT_ON_8:
           this.#strategy = strategy;
           break;
@@ -78,7 +78,6 @@ class Player {
           throw new Error('Invalid strategy');
     }
   }
-
 
 }
 
