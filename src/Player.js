@@ -1,14 +1,18 @@
 const Hand = require('../src/Hand');
 const States = require('../src/States_types');
+const Strategy = require('../src/Strategy_types');
 
 class Player {
     #name ="";
     #budget;
     #hand;
     #state;
+    #strategy;
     constructor() {
       this.#budget = 100;
       this.#hand = new Hand();
+      this.#state = States.WAITING;
+      this.#strategy = Strategy.ALWAYS_HIT_ON_8;
     }
     getName() {
         return this.#name;
@@ -59,6 +63,21 @@ class Player {
       }
         
     }
+    getStrategy() {
+        return this.#strategy;
+    }
+    setStrategy(strategy) {
+      switch (state) {
+        case Strategy.ALWAYS_HIT_ON_8:
+          this.#strategy = strategy;
+          break;
+        case Strategy.STAND_ON_17:
+          this.#strategy = strategy;  
+          break;
+        default:
+          throw new Error('Invalid strategy');
+    }
+  }
 
 
 }

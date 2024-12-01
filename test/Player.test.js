@@ -42,5 +42,5 @@ test("The player has a strategy", () => {
     const player = new Player();
     player.setStrategy(Strategy.ALWAYS_HIT_ON_8);
     expect(player.getStrategy()).toBe("Always hit on 8")
-    // expect(() =>player.setState("unvalid state")).toThrow('Invalid state');
+    /expect(() =>player.setStrategy("invalid strategy")).toThrow('Invalid strategy');
 })
