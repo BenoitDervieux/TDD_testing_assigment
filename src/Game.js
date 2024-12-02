@@ -66,6 +66,9 @@ class Game {
           this._players[j].getHand().addCard(this.#dealer.getDeck().draw_card());
         }
       }
+      for (let i = 0; i < 2; i++) {
+        this.#dealer.getHand().addCard(this.#dealer.getDeck().draw_card());
+      }
     }
 
 }
