@@ -19,12 +19,23 @@ test("The Game can create players between 1 and 6", () => {
     expect(() => game3.createPlayer(7)).toThrow('Invalid number of players');
 } )
 
-test("The Game has a start menu", () => {
+test("The Game has a start menu and initialize the game", () => {
     const game = new GameStub();
-    const spy = jest.spyOn(game, 'start');
-    const spy2 = jest.spyOn(game, 'initGame');
+    const spy_start = jest.spyOn(game, 'start');
+    const spy_initGame = jest.spyOn(game, 'initGame');
+    // const spy_shuffle = jest.spyOn(game, 'shuffle');
     game.start('1');
-    expect(spy).toHaveBeenCalled();
-    expect(spy2).toHaveBeenCalled();
+    expect(spy_start).toHaveBeenCalled();
+    expect(spy_initGame).toHaveBeenCalled();
     expect(game.getPlayers().length).toBe(4);
+})
+
+test("The Game distrobiutes cards to the players", () => {
+    const game = new GameStub();
+    game.start('1');
+    expect(game.getPlayers().length).toBe(4);
+    const players = game.getPlayers();
+    for (let i = 0; i < players.length; i++) {
+        expect(players[i].getHand().getCards().length).toBe(2);
+    }
 })

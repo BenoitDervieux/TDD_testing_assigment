@@ -12,6 +12,10 @@ class Dealer extends Player {
     getDeck() {
         return this.#deck;
     }
+
+    shuffle() {
+        this.#deck.shuffle();
+    }
 }
 
 module.exports = Dealer;
