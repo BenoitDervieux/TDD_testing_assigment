@@ -1,5 +1,6 @@
 const Dealer = require('../src/Dealer');
 const Player = require('../src/Player');
+const prompt = require('prompt-sync')({ sigint: true});
 
 class Game {
   #dealer;
@@ -17,7 +18,22 @@ class Game {
       }
     }
 
-    
-}
+    start() {
+      let p = "";
+      while (p !== 'q') {
+        console.log("Welcome to the black Jack Game");
+        console.log("1 - Start the game");
+        console.log("q - Exit");
+        p = prompt("Enter your choice: ")
+        if (p === '1') {
+          console.log("Let's play Bebe");
+        } else if (p === 'q') {
 
-  module.exports = Game;
+        } else {
+          console.log('I did not understand the request');
+        }
+      }
+    }
+
+}
+module.exports = Game;
