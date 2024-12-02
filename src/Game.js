@@ -35,7 +35,7 @@ class Game {
         }
         if (p === '1') {
           console.log("Let's play Bebe");
-
+          this.initGame(4);
           p = 'q';
         } else if (p === 'q') {
 
@@ -46,7 +46,7 @@ class Game {
       }
     }
 
-    initGame(test = 1) {
+    initGame(test = 0) {
       let number;
       while (Number.isInteger(number) === false) {
         if (test !== 0) {
