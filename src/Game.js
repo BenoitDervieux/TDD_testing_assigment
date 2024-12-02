@@ -13,6 +13,9 @@ class Game {
       return this.#dealer;
     }
     createPlayer(number) {
+      if (number < 1 || number > 6) {
+        throw new Error('Invalid number of players')
+      }
       for (let i = 0; i < number; i++) {
         this._players.push(new Player());
       }
