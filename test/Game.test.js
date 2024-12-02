@@ -21,4 +21,9 @@ test("The Game can create players between 1 and 6", () => {
 
 test("The Game has a start menu", () => {
     const game = new Game();
+    const spy = jest.spyOn(game, 'start');
+    const spy2 = jest.spyOn(game, 'initGame');
+    game.start('1');
+    expect(spy).toHaveBeenCalled();
+    expect(spy2).toHaveBeenCalled();
 })

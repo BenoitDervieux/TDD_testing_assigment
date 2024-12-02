@@ -21,21 +21,45 @@ class Game {
       }
     }
 
-    start() {
+    start(test = 0) {
       let p = "";
+      if (test !== 0) {
+        p = test;
+      }
       while (p !== 'q') {
         console.log("Welcome to the black Jack Game");
         console.log("1 - Start the game");
         console.log("q - Exit");
-        p = prompt("Enter your choice: ")
+        if ( p === "") {
+          p = prompt("Enter your choice: ")
+        }
         if (p === '1') {
           console.log("Let's play Bebe");
+
+          p = 'q';
         } else if (p === 'q') {
 
         } else {
           console.log('I did not understand the request');
+          p = 'q';
         }
       }
+    }
+
+    initGame(test = 1) {
+      let number;
+      while (Number.isInteger(number) === false) {
+        if (test !== 0) {
+          number = test;
+        } else {
+          number = parseInt(prompt("Enter the number of players : "));
+        }
+      }
+      if (number < 1 || number > 6) {
+        throw new Error('Invalid number of players')
+      }
+      this.createPlayer(number);
+
     }
 
 }
