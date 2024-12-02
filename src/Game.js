@@ -60,7 +60,12 @@ class Game {
       }
       console.log(`There are ${number} players`);
       this.createPlayer(number);
-
+      this.#dealer.shuffle();
+      for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < this._players.length; j++) {
+          this._players[j].getHand().addCard(this.#dealer.getDeck().draw_card());
+        }
+      }
     }
 
 }

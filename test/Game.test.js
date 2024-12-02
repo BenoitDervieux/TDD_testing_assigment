@@ -30,7 +30,7 @@ test("The Game has a start menu and initialize the game", () => {
     expect(game.getPlayers().length).toBe(4);
 })
 
-test("The Game distrobiutes cards to the players", () => {
+test("The Game distributes cards to the players and the dealer", () => {
     const game = new GameStub();
     game.start('1');
     expect(game.getPlayers().length).toBe(4);
@@ -38,4 +38,5 @@ test("The Game distrobiutes cards to the players", () => {
     for (let i = 0; i < players.length; i++) {
         expect(players[i].getHand().getCards().length).toBe(2);
     }
+    expect(game.getDealer().getHand().getCards().length).toBe(2);
 })
