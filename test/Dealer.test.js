@@ -9,5 +9,9 @@ test("The dealer has a deck", () => {
 
 test("The dealer can shuffle", () => {
     const dealer = new Dealer();
-    expect(dealer.getDeck()).toBeInstanceOf(Deck);
+    const spy = jest.spyOn(dealer, 'shuffle');
+    dealer.shuffle();
+    expect(spy).toHaveBeenCalled();
 })
+
+

@@ -58,6 +58,7 @@ class Game {
       if (number < 1 || number > 6) {
         throw new Error('Invalid number of players')
       }
+      console.log(`There are ${number} players`);
       this.createPlayer(number);
 
     }

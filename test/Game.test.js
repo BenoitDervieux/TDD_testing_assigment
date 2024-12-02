@@ -26,4 +26,5 @@ test("The Game has a start menu", () => {
     game.start('1');
     expect(spy).toHaveBeenCalled();
     expect(spy2).toHaveBeenCalled();
+    expect(game.getPlayers().length).toBe(4);
 })
