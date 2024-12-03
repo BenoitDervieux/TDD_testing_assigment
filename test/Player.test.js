@@ -58,3 +58,16 @@ test("The player can hit()", () => {
     expect(playerStub.getHand().getCards().length).toBe(2);
     
 })
+
+test("The player have defined states while playing", () => {
+    const game = new GameStub();
+    game.start('1');
+    const players = game.getPlayers();
+    for (let i = 0; i < players.length; i++) {
+        if (players[i].getHand().getValue() > 21) {
+            expect(players[i].getState()).toBe(States.BUSTED);
+        } else if (players[i].getHand().getValue() <= 21) {
+            expect(players[i].getState()).toBe(States.STOOD);
+        }
+    }
+})

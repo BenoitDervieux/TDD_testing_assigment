@@ -18,7 +18,9 @@ class Game {
         throw new Error('Invalid number of players')
       }
       for (let i = 0; i < number; i++) {
-        this._players.push(new Player());
+        const player = new Player();
+        player.setState(States.PLAYING)
+        this._players.push(player);
       }
     }
 
@@ -65,7 +67,9 @@ class Game {
         for (let j = 0; j < this._players.length; j++) {
           const card = this.#dealer.getDeck().draw_card();
           console.log(`Player ${j} gets ${card.getStringRepresentation()}`)
-          this._players[j].getHand().addCard(card);
+          if (this._players[j].getState() === States.PLAYING) {
+            this._players[j].getHand().addCard(card);
+          }
         }
       }
       for (let i = 0; i < 2; i++) {
