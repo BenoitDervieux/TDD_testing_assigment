@@ -107,10 +107,13 @@ class Game {
           } else {
             break;
           }
-          if (this._players[i].getHand().getValue() > 21) {
-            console.log(`Player ${i} lost`)
-            this._players[i].setState(States.LOST)
-          }
+      }
+      if (this._players[i].getHand().getValue() > 21) {
+        console.log(`Player ${i} lost`)
+        this._players[i].setState(States.LOST)
+      } else if (this._players[i].getHand().getValue() < 22) {
+        console.log(`Player ${i} is standing`)
+        this._players[i].setState(States.STOOD)
       }
     }
   }

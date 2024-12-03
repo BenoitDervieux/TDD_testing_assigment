@@ -5,6 +5,7 @@ const Hand = require('../src/Hand');
 const States = require('../src/States_types');
 const Strategy = require('../src/Strategy_types');
 const Card = require('../src/Card');
+const GameStub = require('../src/GameStub');
 
 
 test("The player has a name, a budget and a hand", () => {
@@ -65,7 +66,7 @@ test("The player have defined states while playing", () => {
     const players = game.getPlayers();
     for (let i = 0; i < players.length; i++) {
         if (players[i].getHand().getValue() > 21) {
-            expect(players[i].getState()).toBe(States.BUSTED);
+            expect(players[i].getState()).toBe(States.LOST);
         } else if (players[i].getHand().getValue() <= 21) {
             expect(players[i].getState()).toBe(States.STOOD);
         }
