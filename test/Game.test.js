@@ -1,6 +1,7 @@
 const Game = require('../src/Game');
 const GameStub = require('../src/GameStub');
 const Dealer = require('../src/Dealer');
+const State_types = require('../src/States_types');
 
 
 
@@ -41,3 +42,18 @@ test("The Game distributes cards to the players and the dealer", () => {
     }
     expect(game.getDealer().getHand().getCards().length).toBeGreaterThanOrEqual(2);
 })
+
+
+test("The Game makes the distinction between winners and loosers", () => {
+    const game = new GameStub();
+    game.start('1');
+    expect(game.getPlayers().length).toBe(4);
+    const players = game.getPlayers();
+    const dealer = game.getDealer();
+    for (let i = 0; i < players.length; i++) {
+        if (players[i].getHand().getValue() > dealer.getHand().getValue() && players[i].getState() !== State_types.LOST) {
+            expect(players[i].getState()).toBe(State_types.WON)
+        }
+    }
+})
+

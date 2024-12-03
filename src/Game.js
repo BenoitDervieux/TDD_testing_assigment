@@ -129,6 +129,10 @@ class Game {
     } else {
       console.log(`Dealer's score is: ${this._dealer.getHand().getValue()}`)
     }
+
+    // for (let i = 0; i < this._players.length; i++) {
+    //   if ()
+    // }
   }
 
 }
