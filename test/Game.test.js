@@ -59,3 +59,11 @@ test("The Game makes the distinction between winners and loosers", () => {
     }
 })
 
+// test("The Game celebrates its winner", () => {
+//     const game = new GameStub();
+//     game.start('1');
+//     const spy_celebrate = jest.spyOn(game, 'celebrate');
+//     expect(spy_celebrate).toHaveBeenCalled();
+
+// })
+

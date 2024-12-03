@@ -66,7 +66,7 @@ class Game {
       for (let i = 0; i < 2; i++) {
         for (let j = 0; j < this._players.length; j++) {
           const card = this._dealer.getDeck().draw_card();
-          console.log(`Player ${j} gets ${card.getStringRepresentation()}`)
+          // console.log(`Player ${j} gets ${card.getStringRepresentation()}`)
           if (this._players[j].getState() === States.PLAYING) {
             this._players[j].getHand().addCard(card);
           }
@@ -74,7 +74,7 @@ class Game {
       }
       for (let i = 0; i < 2; i++) {
         const card = this._dealer.getDeck().draw_card();
-        console.log(`Dealer gets ${card.getStringRepresentation()}`)
+        // console.log(`Dealer gets ${card.getStringRepresentation()}`)
         this._dealer.getHand().addCard(card);
       }
       this.play(automatic);
@@ -84,12 +84,12 @@ class Game {
       // Here are the player's turn
       for (let i = 0; i < this._players.length; i++) {
         while (this._players[i].getHand().getValue() < 21) {
-          console.log(`Player ${i} plays:`)
-          console.log(`Points: ${this._players[i].getHand().getValue()}`)
+          // console.log(`Player ${i} plays:`)
+          // console.log(`Points: ${this._players[i].getHand().getValue()}`)
           let result;
           if (automatic) {
             if (this._players[i].getHand().getValue() < 17) {
-              console.log("1 - Hit");
+              // console.log("1 - Hit");
               result = 1;
             }
           } else {
@@ -103,39 +103,53 @@ class Game {
 
           if (result === 1) {
             const card = this._dealer.getDeck().draw_card();
-            console.log(`Player ${i} gets ${card.getStringRepresentation()}`)
+            // console.log(`Player ${i} gets ${card.getStringRepresentation()}`)
             this._players[i].getHand().addCard(card);
           } else {
             break;
           }
       }
       if (this._players[i].getHand().getValue() > 21) {
-        console.log(`Player ${i} lost`)
+        // console.log(`Player ${i} lost`)
         this._players[i].setState(States.LOST)
-      } else if (this._players[i].getHand().getValue() < 22) {
-        console.log(`Player ${i} is standing`)
+      } else {
+        // console.log(`Player ${i} is standing`)
         this._players[i].setState(States.STOOD)
       }
     }
     // Here is the dealer's turn
-    console.log("Dealer's turn");
+    // console.log("Dealer's turn");
     while (this._dealer.getHand().getValue() < 17) {
       const card = this._dealer.getDeck().draw_card();
-      console.log(`Dealer gets ${card.getStringRepresentation()}`)
+      // console.log(`Dealer gets ${card.getStringRepresentation()}`)
       this._dealer.getHand().addCard(card);
     }
     if (this._dealer.getHand().getValue() > 21) {
-      console.log('Dealer is busted');
+      // console.log('Dealer is busted');
     } else {
-      console.log(`Dealer's score is: ${this._dealer.getHand().getValue()}`)
+      // console.log(`Dealer's score is: ${this._dealer.getHand().getValue()}`)
     }
-
+    let winners = [];
     for (let i = 0; i < this._players.length; i++) {
       if (this._players[i].getState() === States.STOOD && this._players[i].getHand().getValue() > this._dealer.getHand().getValue()) {
-        this._players[i].setState(States.WON)
+        const new_winner = this._players[i].setState(States.WON)
+        winners.push(new_winner);
+      } else {
+        this._players[i].setState(States.LOST)
       }
     }
   }
+
+  // celebrate(winner) {
+  //   if (winner.length === 0) {
+  //     console.log('No one beat the dealer');
+  //     return;
+  //   } 
+  //   for (let i = 0; i < winner.length; i++) {
+  //     console.log('')
+  //   }
+    
+  // }
 
 }
 module.exports = Game;

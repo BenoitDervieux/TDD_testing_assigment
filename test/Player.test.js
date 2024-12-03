@@ -64,11 +64,17 @@ test("The player have defined states while playing", () => {
     const game = new GameStub();
     game.start('1');
     const players = game.getPlayers();
+    const dealer = game.getDealer()
     for (let i = 0; i < players.length; i++) {
-        if (players[i].getHand().getValue() > 21) {
+        if (players[i].getHand().getValue() > 21 || (players[i].getHand().getValue() <= dealer.getHand().getValue())) {
             expect(players[i].getState()).toBe(States.LOST);
         } else if (players[i].getHand().getValue() <= 21) {
-            expect(players[i].getState()).toBe(States.STOOD);
+            expect(players[i].getState()).toBe(States.WON);
         }
     }
+})
+
+test('Player have proper name', () => {
+    const player = new Player();
+    expect(player.getName()).toBe(!null);
 })
