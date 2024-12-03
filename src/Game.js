@@ -130,9 +130,11 @@ class Game {
       console.log(`Dealer's score is: ${this._dealer.getHand().getValue()}`)
     }
 
-    // for (let i = 0; i < this._players.length; i++) {
-    //   if ()
-    // }
+    for (let i = 0; i < this._players.length; i++) {
+      if (this._players[i].getState() === States.STOOD && this._players[i].getHand().getValue() > this._dealer.getHand().getValue()) {
+        this._players[i].setState(States.WON)
+      }
+    }
   }
 
 }

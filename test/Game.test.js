@@ -45,14 +45,16 @@ test("The Game distributes cards to the players and the dealer", () => {
 
 
 test("The Game makes the distinction between winners and loosers", () => {
-    const game = new GameStub();
-    game.start('1');
-    expect(game.getPlayers().length).toBe(4);
-    const players = game.getPlayers();
-    const dealer = game.getDealer();
-    for (let i = 0; i < players.length; i++) {
-        if (players[i].getHand().getValue() > dealer.getHand().getValue() && players[i].getState() !== State_types.LOST) {
-            expect(players[i].getState()).toBe(State_types.WON)
+    for (let i = 0; i < 10; i++) {
+        const game = new GameStub();
+        game.start('1');
+        expect(game.getPlayers().length).toBe(4);
+        const players = game.getPlayers();
+        const dealer = game.getDealer();
+        for (let i = 0; i < players.length; i++) {
+            if (players[i].getHand().getValue() > dealer.getHand().getValue() && players[i].getState() !== State_types.LOST) {
+                expect(players[i].getState()).toBe(State_types.WON)
+            }
         }
     }
 })
