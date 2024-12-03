@@ -19,6 +19,7 @@ class Game {
       }
       for (let i = 0; i < number; i++) {
         const player = new Player();
+        player.setName(`Michel-${i}`)
         player.setState(States.PLAYING)
         this._players.push(player);
       }

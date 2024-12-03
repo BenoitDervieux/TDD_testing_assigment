@@ -79,6 +79,6 @@ test('Player have proper name', () => {
     game.start('1');
     const players = game.getPlayers();
     for (const p of players) {
-        expect(p.getName()).toBe(!null);
+        expect(p.getName()).toBeTruthy();
     }
 })
