@@ -130,27 +130,31 @@ class Game {
     } else {
       // console.log(`Dealer's score is: ${this._dealer.getHand().getValue()}`)
     }
-    let winners = [];
+    const winners = [];
     for (let i = 0; i < this._players.length; i++) {
       if (this._players[i].getState() === States.STOOD && this._players[i].getHand().getValue() > this._dealer.getHand().getValue()) {
-        const new_winner = this._players[i].setState(States.WON)
-        winners.push(new_winner);
+        this._players[i].setState(States.WON)
+        winners.push(this._players[i]);
       } else {
         this._players[i].setState(States.LOST)
       }
     }
+    this.celebrate(winners);
   }
 
-  // celebrate(winner) {
-  //   if (winner.length === 0) {
-  //     console.log('No one beat the dealer');
-  //     return;
-  //   } 
-  //   for (let i = 0; i < winner.length; i++) {
-  //     console.log('')
-  //   }
-    
-  // }
+  celebrate(winner) {
+    if (winner.length === 0) {
+      console.log('No one beat the dealer');
+      return;
+    } else {
+      console.log(`There are ${winner.length} winners`);
+    }
+    for (let i = 0; i < winner.length; i++) {
+      const name = winner[i].getName();
+      console.log(`${name} has won`)
+    }
+  
+  }
 
 }
 module.exports = Game;
