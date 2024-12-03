@@ -4,14 +4,14 @@ const prompt = require('prompt-sync')({ sigint: true});
 const States = require('../src/States_types');
 
 class Game {
-  #dealer;
+  _dealer;
   _players = [];
     constructor() {
-      this.#dealer = new Dealer();
+      this._dealer = new Dealer();
     }
 
     getDealer() {
-      return this.#dealer;
+      return this._dealer;
     }
     createPlayer(number) {
       if (number < 1 || number > 6) {
@@ -62,10 +62,10 @@ class Game {
       }
       console.log(`There are ${number} players`);
       this.createPlayer(number);
-      this.#dealer.shuffle();
+      this._dealer.shuffle();
       for (let i = 0; i < 2; i++) {
         for (let j = 0; j < this._players.length; j++) {
-          const card = this.#dealer.getDeck().draw_card();
+          const card = this._dealer.getDeck().draw_card();
           console.log(`Player ${j} gets ${card.getStringRepresentation()}`)
           if (this._players[j].getState() === States.PLAYING) {
             this._players[j].getHand().addCard(card);
@@ -73,9 +73,9 @@ class Game {
         }
       }
       for (let i = 0; i < 2; i++) {
-        const card = this.#dealer.getDeck().draw_card();
+        const card = this._dealer.getDeck().draw_card();
         console.log(`Dealer gets ${card.getStringRepresentation()}`)
-        this.#dealer.getHand().addCard(card);
+        this._dealer.getHand().addCard(card);
       }
       this.play(automatic);
     }
@@ -101,7 +101,7 @@ class Game {
           }
 
           if (result === 1) {
-            const card = this.#dealer.getDeck().draw_card();
+            const card = this._dealer.getDeck().draw_card();
             console.log(`Player ${i} gets ${card.getStringRepresentation()}`)
             this._players[i].getHand().addCard(card);
           } else {

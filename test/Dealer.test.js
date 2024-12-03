@@ -1,6 +1,7 @@
 const Dealer = require('../src/Dealer');
 const Deck = require('../src/Deck');
 const Card = require('../src/Card');
+const GameStub = require('../src/GameStub');
 
 test("The dealer has a deck", () => {
     const dealer = new Dealer();
@@ -20,6 +21,15 @@ test("The dealer can give out a card", () => {
     dealer.shuffle();
     const card = dealer.getDeck().draw_card();
     expect(card).toBeInstanceOf(Card);
+})
+
+test("The dealer plays after the players", () => {
+    for (let i = 0; i < 10; i++) {
+        const game = new GameStub();
+        game.start('1');
+        const dealer = game.getDealer();
+        expect(dealer.getHand().getValue()).toBeGreaterThanOrEqual(17)
+    }
 })
 
 
