@@ -81,6 +81,7 @@ class Game {
     }
 
     play(automatic = false) {
+      // Here are the player's turn
       for (let i = 0; i < this._players.length; i++) {
         while (this._players[i].getHand().getValue() < 21) {
           console.log(`Player ${i} plays:`)
@@ -115,6 +116,18 @@ class Game {
         console.log(`Player ${i} is standing`)
         this._players[i].setState(States.STOOD)
       }
+    }
+    // Here is the dealer's turn
+    console.log("Dealer's turn");
+    while (this._dealer.getHand().getValue() < 17) {
+      const card = this._dealer.getDeck().draw_card();
+      console.log(`Dealer gets ${card.getStringRepresentation()}`)
+      this._dealer.getHand().addCard(card);
+    }
+    if (this._dealer.getHand().getValue() > 21) {
+      console.log('Dealer is busted');
+    } else {
+      console.log(`Dealer's score is: ${this._dealer.getHand().getValue()}`)
     }
   }
 
