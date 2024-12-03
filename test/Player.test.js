@@ -75,6 +75,10 @@ test("The player have defined states while playing", () => {
 })
 
 test('Player have proper name', () => {
-    const player = new Player();
-    expect(player.getName()).toBe(!null);
+    const game = new GameStub();
+    game.start('1');
+    const players = game.getPlayers();
+    for (const p of players) {
+        expect(p.getName()).toBe(!null);
+    }
 })
