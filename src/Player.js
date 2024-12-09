@@ -30,6 +30,7 @@ class Player {
         return this.#state;
     }
     setState(state) {
+      
       switch (state) {
         case States.PLAYING:
           this.#state = state;

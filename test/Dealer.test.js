@@ -25,7 +25,7 @@ test("The dealer can give out a card", () => {
 
 test("The dealer plays after the players", () => {
     const game = new GameStub();
-    game.start('1');
+    game.start(true);
     const dealer = game.getDealer();
     expect(dealer.getHand().getValue()).toBeGreaterThanOrEqual(17)
 })

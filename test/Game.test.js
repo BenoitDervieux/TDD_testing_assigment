@@ -28,14 +28,14 @@ test("The Game has a start menu and initialize the game", () => {
     game.start(true);
     expect(spy_start).toHaveBeenCalled();
     expect(spy_initGame).toHaveBeenCalled();
-    expect(game.getPlayers().length).toBe(4);
+    expect(game.getPlayers().length).toBe(1);
     expect(spy_play).toHaveBeenCalled();
 })
 
 test("The Game distributes cards to the players and the dealer", () => {
     const game = new GameStub();
-    game.start('1');
-    expect(game.getPlayers().length).toBe(4);
+    game.start(true);
+    expect(game.getPlayers().length).toBe(1);
     const players = game.getPlayers();
     for (let i = 0; i < players.length; i++) {
         expect(players[i].getHand().getCards().length).toBeGreaterThanOrEqual(2);
@@ -47,8 +47,8 @@ test("The Game distributes cards to the players and the dealer", () => {
 test("The Game makes the distinction between winners and loosers", () => {
     for (let i = 0; i < 10; i++) {
         const game = new GameStub();
-        game.start('1');
-        expect(game.getPlayers().length).toBe(4);
+        game.start(true);
+        expect(game.getPlayers().length).toBe(1);
         const players = game.getPlayers();
         const dealer = game.getDealer();
         for (let i = 0; i < players.length; i++) {
@@ -62,7 +62,7 @@ test("The Game makes the distinction between winners and loosers", () => {
 test("The Game celebrates its winner", () => {
     const game = new GameStub();
     const spy_celebrate = jest.spyOn(game, 'celebrate');
-    game.start('1');
+    game.start(true);
     expect(spy_celebrate).toHaveBeenCalled();
 })
 

@@ -11,3 +11,4 @@ const State_types = Object.freeze({
 });
 
 module.exports = State_types
+

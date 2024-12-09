@@ -62,7 +62,7 @@ test("The player can hit()", () => {
 
 test("The player have defined states while playing", () => {
     const game = new GameStub();
-    game.start('1');
+    game.start(true);
     const players = game.getPlayers();
     const dealer = game.getDealer()
     for (let i = 0; i < players.length; i++) {
@@ -76,7 +76,7 @@ test("The player have defined states while playing", () => {
 
 test('Player have proper name', () => {
     const game = new GameStub();
-    game.start('1');
+    game.start(true);
     const players = game.getPlayers();
     for (const p of players) {
         expect(p.getName()).toBeTruthy();
