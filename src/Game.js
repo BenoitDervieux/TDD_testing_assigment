@@ -25,6 +25,10 @@ class Game {
       }
     }
 
+    stringDisplay(string) {
+      console.log(`\n${string}`)
+    }
+
     start(automatic = false) {
       let p = "";
       p = automatic ? '1': p;
@@ -34,26 +38,26 @@ class Game {
         switch(p) {
           case "":
             p = prompt("Enter your choice start menu: ")
+            console.log("On console log le p" + p)
+            if (p !== "1") return
           case "1":
             if (automatic === false) {
               this.initGame();
               p ="";
               this._players =[]
+              this._dealer = new Dealer();
             } else {
               this.initGame(automatic);
               p = 'q';
             }
           case "q":
-            break;
+            // return
           default:
             this.stringDisplay('I did not understand the request');
             p = 'q';
+            // return
         }
       }
-    }
-
-    stringDisplay(string) {
-      console.log(`\n${string}`)
     }
 
     initGame(automatic = false) {
@@ -65,6 +69,44 @@ class Game {
       this.distributeTwoCardsToDealer();
       this.play(automatic);
     }
+
+    play(automatic = false) {
+      // Here are the player's turn
+    for (let i = 0; i < this._players.length; i++) {
+        while (this._players[i].getHand().getValue() < 21) {
+          this.stringDisplay(`Player ${i} plays:`)
+          this.stringDisplay(`Points: ${this._players[i].getHand().getValue()}`)
+          let result;
+          if (automatic) {
+            if (this._players[i].getHand().getValue() < 17) {
+              this.stringDisplay("1 - Hit");
+              result = 1;
+            }
+          } else {
+            this.stringDisplay("1 - Hit");
+            this.stringDisplay("2 - Stand");
+            while (Number.isInteger(result) === false && (result !== 1 || result !== 2)) {
+              result = parseInt(prompt("Enter your choice between hit and stand: "));
+            }
+          }
+
+          if (result === 1) {
+            const card = this._dealer.getDeck().draw_card();
+            this.stringDisplay(`Player ${i} gets ${card.getStringRepresentation()}`)
+            this._players[i].getHand().addCard(card);
+          } else {
+            break;
+          }
+      }
+      this.adjustState(this._players[i])
+    }
+    // Here is the dealer's turn
+    this.stringDisplay("Dealer's turn");
+    this.distributeToDealer(this._dealer);
+    this.adjustState(this._dealer)
+    const winners = this.getWinners(this._players, this._dealer);
+    this.celebrate(winners);
+  }
 
     getNumberOfPlayer(automatic = false) {
       let number;
@@ -102,50 +144,12 @@ class Game {
       }
     }
 
-    play(automatic = false) {
-      // Here are the player's turn
-    for (let i = 0; i < this._players.length; i++) {
-        while (this._players[i].getHand().getValue() < 21) {
-          this.stringDisplay(`Player ${i} plays:`)
-          this.stringDisplay(`Points: ${this._players[i].getHand().getValue()}`)
-          let result;
-          if (automatic) {
-            if (this._players[i].getHand().getValue() < 17) {
-              this.stringDisplay("1 - Hit");
-              result = 1;
-            }
-          } else {
-            this.stringDisplay("1 - Hit");
-            this.stringDisplay("2 - Stand");
-            while (Number.isInteger(result) === false && (result !== 1 || result !== 2)) {
-              result = parseInt(prompt("Enter your choice between hit and stand: "));
-            }
-          }
-
-          if (result === 1) {
-            const card = this._dealer.getDeck().draw_card();
-            this.stringDisplay(`Player ${i} gets ${card.getStringRepresentation()}`)
-            this._players[i].getHand().addCard(card);
-          } else {
-            break;
-          }
-      }
-      this.adjustState(this._players[i])
-    }
-    // Here is the dealer's turn
-    this.stringDisplay("Dealer's turn");
-    this.distributeToDealer();
-    this.adjustState(this._dealer)
-    const winners = this.getWinners(this._players, this._dealer);
-    this.celebrate(winners);
-  }
-
-  distributeToDealer() {
-    while (this._dealer.getHand().getValue() < 17) {
-      const card = this._dealer.getDeck().draw_card();
+  distributeToDealer(dealer) {
+    while (dealer.getHand().getValue() < 17) {
+      const card = dealer.getDeck().draw_card();
       console.log("Dans distribute to dealer")
       this.stringDisplay(`Dealer gets ${card.getStringRepresentation()}`)
-      this._dealer.getHand().addCard(card);
+      dealer.getHand().addCard(card);
     }
   }
 
@@ -163,7 +167,6 @@ class Game {
   }
 
   adjustState(player) {
-    console.log(' i am in adjust state and the score of the player is: ' + player.getHand().getValue())
     if (player.getHand().getValue() > 21) {
       if (player instanceof Dealer) {
         this.stringDisplay('Dealer is busted');
@@ -199,5 +202,5 @@ class Game {
 }
 module.exports = Game;
 
-const game = new Game()
-game.start()
+// const game = new Game()
+// game.start()
