@@ -5,7 +5,9 @@ const Hand = require('../src/Hand');
 const Deck = require('../src/Deck');
 const State_types = require('../src/States_types');
 
-
+test("The Gamr throws an error if no dealer is provided", () => {
+    expect(() => new Game()).toThrow('No dealer provided');
+})
 
 test("The Game has a dealer", () => {
     const hand = new Hand();
