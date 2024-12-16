@@ -204,5 +204,5 @@ module.exports = Game;
 // const hand = new Hand();
 // const deck = new Deck();
 // const dealer = new Dealer(hand, deck);
-// const game = new Game()
+// const game = new Game(dealer)
 // game.start()

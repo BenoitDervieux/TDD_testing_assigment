@@ -4,6 +4,11 @@ const Card = require('../src/Card');
 const GameStub = require('../src/GameStub');
 const Hand = require('../src/Hand');
 
+test("The dealer triggers an error if no deck is provided", () => {
+    const dealer = new Dealer();
+    expect(dealer).toThrow('No deck provided');
+})
+
 test("The dealer has a deck", () => {
     const hand = new Hand();
     const deck = new Deck();
