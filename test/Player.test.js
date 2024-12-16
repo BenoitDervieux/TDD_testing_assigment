@@ -6,6 +6,9 @@ const GameStub = require('../src/GameStub');
 const Dealer = require('../src/Dealer');
 const Deck = require('../src/Deck');
 
+test("The player throws an error if no hand is provided", () => {
+    expect(() => new Player()).toThrow('No hand provided');
+    })
 
 test("The player has a name, a budget and a hand", () => {
     const hand = new Hand();
