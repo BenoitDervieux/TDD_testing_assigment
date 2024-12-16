@@ -8,6 +8,9 @@ class Game {
   _dealer;
   _players = [];
     constructor(dealer) {
+      if (!dealer) {
+        throw new Error('No dealer provided')
+      }
       this._dealer = dealer
     }
 

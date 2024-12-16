@@ -5,7 +5,7 @@ const Hand = require('../src/Hand');
 const Deck = require('../src/Deck');
 const State_types = require('../src/States_types');
 
-test("The Gamr throws an error if no dealer is provided", () => {
+test("The Game throws an error if no dealer is provided", () => {
     expect(() => new Game()).toThrow('No dealer provided');
 })
 
@@ -24,9 +24,9 @@ test("The Game can create players between 1 and 6", () => {
     const game = new GameStub(dealer);
     game.createPlayer(2);
     expect(game.getPlayers().length).toBe(2);
-    const game2 = new GameStub();
+    const game2 = new GameStub(new Dealer(new Hand(), new Deck()));
     expect(() => game2.createPlayer(0)).toThrow('Invalid number of players');
-    const game3 = new GameStub();
+    const game3 = new GameStub(new Dealer(new Hand(), new Deck()));
     expect(() => game3.createPlayer(7)).toThrow('Invalid number of players');
 } )
 

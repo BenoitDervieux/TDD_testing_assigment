@@ -10,6 +10,6 @@ test("The classes exists", () => {
     expect(new Dealer(new Hand(), new Deck())).toBeInstanceOf(Dealer);
     expect(new Card()).toBeInstanceOf(Card);
     expect(new Deck()).toBeInstanceOf(Deck);
-    expect(new Game()).toBeInstanceOf(Game);
+    expect(new Game(new Dealer(new Hand(), new Deck()))).toBeInstanceOf(Game);
     expect(new Hand()).toBeInstanceOf(Hand);
 });
