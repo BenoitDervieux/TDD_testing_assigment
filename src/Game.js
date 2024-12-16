@@ -63,7 +63,6 @@ class Game {
       let number = this.getNumberOfPlayer(automatic);
       this.stringDisplay(`There are ${number} players`);
       this.createPlayer(number);
-      this._dealer.shuffle();
       this.distributeToPlayers();
       this.distributeTwoCardsToDealer();
       this.play(automatic);

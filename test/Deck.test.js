@@ -1,30 +1,23 @@
 const Deck = require('../src/Deck');
-const DeckStub = require('../src/DeckStub');
 const Card = require('../src/Card');
 
-
-test("The deck has 52 Cards", () => {
+test("The deck crates cards dynamically", () => {
     const deck = new Deck();
-    expect(deck.getNumberOfCards()).toBe(52);
-} )
-
-test("It is possible to draw card from the deck and atempting to get a card from an empty array should throw an error", () => {
-    const deck = new Deck();
-    for (let i = 0; i < 52; i++) {
+    for (let i = 0; i < 1000; i++) {
         const card = deck.draw_card();
         expect(card).toBeInstanceOf(Card);
     }
-    expect(() => deck.draw_card()).toThrow('No cards left in the deck');
 })
 
 test("The deck shuffle has a method to shuffle the cards", () => {
-    const deck = new DeckStub();
-    const cards_array_1 = deck.getCards();
+    const deck = new Deck();
+    let cards_array_1 = []
+    for (let i = 0; i < 1000; i++) {
+        const card = deck.draw_card();
+        cards_array_1.push(card);
+    }
     let result = cardsAreRandom(cards_array_1);
-    expect(result).toBe(false);
-    deck.shuffle();
-    result = cardsAreRandom(cards_array_1);
-    expect(result).toBe(true); 
+    expect(result).toBe(true);
 })
 
 function cardsAreRandom(cards) {

@@ -4,6 +4,8 @@ class Card {
     #suit = '';
     #rank = '';
     constructor() {
+    this.setSuit(Suit_types[Math.floor(Math.random() * Suit_types.length)])
+    this.setRank(Rank_types[Math.floor(Math.random() * Rank_types.length)])
     }
 
     getSuit() {
