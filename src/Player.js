@@ -9,9 +9,9 @@ class Player {
     #hand;
     #state;
     #strategy;
-    constructor() {
+    constructor(hand) {
       this.#budget = 100;
-      this.#hand = new Hand();
+      this.#hand = hand;
       this.#state = States.WAITING;
       this.#strategy = Strategy.ALWAYS_HIT_ON_8;
     }

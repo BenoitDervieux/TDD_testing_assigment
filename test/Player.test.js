@@ -4,10 +4,12 @@ const States = require('../src/States_types');
 const Strategy = require('../src/Strategy_types');
 const GameStub = require('../src/GameStub');
 const Dealer = require('../src/Dealer');
+const Deck = require('../src/Deck');
 
 
 test("The player has a name, a budget and a hand", () => {
-    const player = new Player();
+    const hand = new Hand();
+    const player = new Player(hand);
     player.setName("Player1");
     expect(player.getName()).toBe("Player1");
     expect(player.getBudget()).toBe(100);
@@ -17,7 +19,8 @@ test("The player has a name, a budget and a hand", () => {
 
 
 test("The player has a state and throws an exception for bad states", () => {
-    const player = new Player();
+    const hand = new Hand();
+    const player = new Player(hand);
     player.setState(States.PLAYING);
     expect(player.getState()).toBe("playing")
     player.setState(States.BUSTED);
@@ -40,15 +43,16 @@ test("The player has a state and throws an exception for bad states", () => {
 })
 
 test("The player has a strategy and throws error when invalid strategy", () => {
-    const player = new Player();
+    const hand = new Hand();
+    const player = new Player(hand);
     player.setStrategy(Strategy.ALWAYS_HIT_ON_8);
     expect(player.getStrategy()).toBe("Always hit on 8")
     expect(() => player.setStrategy("bad strategy")).toThrow('Invalid strategy');
 })
 
 test("The player can hit()", () => {
-    const player = new Player();
-    const dealer = new Dealer();
+    const hand = new Hand();
+    const player = new Player(hand);
     const mockCard = {
         setSuit: jest.fn(),
         setRank: jest.fn(),
@@ -61,10 +65,12 @@ test("The player can hit()", () => {
 })
 
 test("The player have defined states while playing", () => {
-    const game = new GameStub();
+    const hand = new Hand();
+    const deck = new Deck();
+    const dealer = new Dealer(hand, deck);
+    const game = new GameStub(dealer);
     game.start(true);
     const players = game.getPlayers();
-    const dealer = game.getDealer()
     for (let i = 0; i < players.length; i++) {
         if (players[i].getHand().getValue() > 21 || (players[i].getHand().getValue() <= dealer.getHand().getValue())) {
             expect(players[i].getState()).toBe(States.LOST);
@@ -75,7 +81,10 @@ test("The player have defined states while playing", () => {
 })
 
 test('Player have proper name', () => {
-    const game = new GameStub();
+    const hand = new Hand();
+    const deck = new Deck();
+    const dealer = new Dealer(hand, deck);
+    const game = new GameStub(dealer);
     game.start(true);
     const players = game.getPlayers();
     for (const p of players) {

@@ -2,12 +2,13 @@ const Dealer = require('../src/Dealer');
 const Player = require('../src/Player');
 const prompt = require('prompt-sync')({ sigint: true});
 const States = require('../src/States_types');
+const Hand = require('../src/Hand');
 
 class Game {
   _dealer;
   _players = [];
-    constructor() {
-      this._dealer = new Dealer();
+    constructor(dealer) {
+      this._dealer = dealer
     }
 
     getDealer() {
@@ -18,7 +19,8 @@ class Game {
         throw new Error('Invalid number of players')
       }
       for (let i = 0; i < number; i++) {
-        const player = new Player();
+        const hand = new Hand();
+        const player = new Player(hand);
         player.setName(`Michel-${i}`)
         player.setState(States.PLAYING)
         this._players.push(player);
@@ -199,5 +201,8 @@ class Game {
 }
 module.exports = Game;
 
+// const hand = new Hand();
+// const deck = new Deck();
+// const dealer = new Dealer(hand, deck);
 // const game = new Game()
 // game.start()

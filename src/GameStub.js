@@ -1,7 +1,7 @@
 const Game = require('./Game');
 class GameStub extends Game {
-    constructor() {
-        super();
+    constructor(dealer) {
+        super(dealer);
     }
     getPlayers() {
         return this._players;

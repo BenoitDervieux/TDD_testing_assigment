@@ -4,9 +4,9 @@ const Deck = require('./Deck');
 class Dealer extends Player {
 
     #deck;
-    constructor() {
-        super();
-        this.#deck = new Deck();
+    constructor(hand, deck) {
+        super(hand);
+        this.#deck = deck
     };
 
     getDeck() {
