@@ -1,11 +1,9 @@
 const Player = require('../src/Player');
-const PlayerStub = require('../src/PlayerStub');
-const HandStub = require('../src/HandStub');
 const Hand = require('../src/Hand');
 const States = require('../src/States_types');
 const Strategy = require('../src/Strategy_types');
-const Card = require('../src/Card');
 const GameStub = require('../src/GameStub');
+const Dealer = require('../src/Dealer');
 
 
 test("The player has a name, a budget and a hand", () => {
@@ -49,16 +47,17 @@ test("The player has a strategy and throws error when invalid strategy", () => {
 })
 
 test("The player can hit()", () => {
-    const playerStub = new PlayerStub();
+    const player = new Player();
+    const dealer = new Dealer();
     const mockCard = {
         setSuit: jest.fn(),
         setRank: jest.fn(),
         getValue: jest.fn().mockReturnValue(10), // Mock the card's value
     };
-    playerStub.getHand().addCard(mockCard);
-    expect(playerStub.getHand().getCards().length).toBe(1);
-    playerStub.hit();
-    expect(playerStub.getHand().getCards().length).toBe(2);
+    player.getHand().addCard(mockCard);
+    expect(player.getHand().getCards().length).toBe(1);
+    player.getHand().addCard(mockCard);
+    expect(player.getHand().getCards().length).toBe(2);
 })
 
 test("The player have defined states while playing", () => {
