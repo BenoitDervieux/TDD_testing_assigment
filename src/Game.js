@@ -17,6 +17,10 @@ class Game {
     getDealer() {
       return this._dealer;
     }
+
+    getPlayers() {
+      return this._players;
+  }
     createPlayer(number) {
       if (number < 1 || number > 6) {
         throw new Error('Invalid number of players')

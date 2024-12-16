@@ -2,9 +2,9 @@ const Player = require('../src/Player');
 const Hand = require('../src/Hand');
 const States = require('../src/States_types');
 const Strategy = require('../src/Strategy_types');
-const GameStub = require('../src/GameStub');
 const Dealer = require('../src/Dealer');
 const Deck = require('../src/Deck');
+const Game = require('../src/Game');
 
 test("The player throws an error if no hand is provided", () => {
     expect(() => new Player()).toThrow('No hand provided');
@@ -71,7 +71,7 @@ test("The player have defined states while playing", () => {
     const hand = new Hand();
     const deck = new Deck();
     const dealer = new Dealer(hand, deck);
-    const game = new GameStub(dealer);
+    const game = new Game(dealer);
     game.start(true);
     const players = game.getPlayers();
     for (let i = 0; i < players.length; i++) {
@@ -87,7 +87,7 @@ test('Player have proper name', () => {
     const hand = new Hand();
     const deck = new Deck();
     const dealer = new Dealer(hand, deck);
-    const game = new GameStub(dealer);
+    const game = new Game(dealer);
     game.start(true);
     const players = game.getPlayers();
     for (const p of players) {

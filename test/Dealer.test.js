@@ -1,7 +1,7 @@
 const Dealer = require('../src/Dealer');
 const Deck = require('../src/Deck');
 const Card = require('../src/Card');
-const GameStub = require('../src/GameStub');
+const Game = require('../src/Game');
 const Hand = require('../src/Hand');
 
 test("The dealer triggers an error if no deck is provided", () => {
@@ -27,7 +27,7 @@ test("The dealer plays after the players", () => {
     const hand = new Hand();
     const deck = new Deck();
     const dealer = new Dealer(hand, deck);
-    const game = new GameStub(dealer);
+    const game = new Game(dealer);
     game.start(true);
     expect(dealer.getHand().getValue()).toBeGreaterThanOrEqual(17)
 })
