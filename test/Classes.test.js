@@ -6,7 +6,7 @@ const Game = require('../src/Game');
 const Hand = require('../src/Hand');
 
 test("The classes exists", () => {
-    expect(new Player()).toBeInstanceOf(Player);
+    expect(new Player(new Hand())).toBeInstanceOf(Player);
     expect(new Dealer(new Hand(), new Deck())).toBeInstanceOf(Dealer);
     expect(new Card()).toBeInstanceOf(Card);
     expect(new Deck()).toBeInstanceOf(Deck);

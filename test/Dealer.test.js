@@ -5,7 +5,7 @@ const GameStub = require('../src/GameStub');
 const Hand = require('../src/Hand');
 
 test("The dealer triggers an error if no deck is provided", () => {
-    expect(() => new Dealer()).toThrow('No deck provided');
+    expect(() => new Dealer(new Hand())).toThrow('No deck provided');
 })
 
 test("The dealer has a deck", () => {

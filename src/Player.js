@@ -11,6 +11,9 @@ class Player {
     #strategy;
     constructor(hand) {
       this.#budget = 100;
+      if (!hand) {
+        throw new Error('No hand provided');
+      }
       this.#hand = hand;
       this.#state = States.WAITING;
       this.#strategy = Strategy.ALWAYS_HIT_ON_8;
