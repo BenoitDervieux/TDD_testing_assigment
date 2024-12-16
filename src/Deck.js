@@ -4,10 +4,6 @@ const Card = require("./Card")
 class Deck {
     constructor() {
   }
-  getNumberOfCards() {
-    return this._cards.length;
-  }
-
   draw_card() {
     return new Card();
   }
