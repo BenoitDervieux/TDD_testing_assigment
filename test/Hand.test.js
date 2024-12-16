@@ -32,32 +32,40 @@ test("The hand class can calculate a soft", () => {
 
 test("the hand class can calculate the value of 1 cards with no ace", () => {
     const hand = new Hand();
-    const card1 = new Card();
-    card1.setRank('Two');
-    card1.setSuit('hearts');
-    hand.addCard(card1)
+    const mockCard = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(2), // Mock the card's value
+    };
+    hand.addCard(mockCard)
     expect(hand.getValue()).toBe(2);
 })
 
 test("the hand class can calculate the value of 2 cards with no ace", () => {
     const hand = new Hand();
-    const card1 = new Card();
-    card1.setRank('Queen');
-    card1.setSuit('hearts');
-    hand.addCard(card1)
-    const card2 = new Card();
-    card2.setRank('King');
-    card2.setSuit('hearts');
-    hand.addCard(card2)
+    const mockCard1 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(11), // Mock the card's value
+    };
+    hand.addCard(mockCard1)
+    const mockCard2 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(11), // Mock the card's value
+    };
+    hand.addCard(mockCard2)
     expect(hand.getValue()).toBe(22);
 })
 
 test("the hand class can calculate the value of 2 cards with an ace and a card lower than 11", () => {
     const hand = new Hand();
-    const card1 = new Card();
-    card1.setRank('ten');
-    card1.setSuit('hearts');
-    hand.addCard(card1)
+    const mockCard = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(10), // Mock the card's value
+    };
+    hand.addCard(mockCard)
     const card2 = new Card();
     card2.setRank('Ace');
     card2.setSuit('hearts');
@@ -67,10 +75,12 @@ test("the hand class can calculate the value of 2 cards with an ace and a card l
 
 test("the hand class can calculate the value of 3 cards with two ace and a card equal to 11", () => {
     const hand = new Hand();
-    const card1 = new Card();
-    card1.setRank('Queen');
-    card1.setSuit('hearts');
-    hand.addCard(card1)
+    const mockCard = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(11), // Mock the card's value
+    };
+    hand.addCard(mockCard)
     const card2 = new Card();
     card2.setRank('Ace');
     card2.setSuit('hearts');

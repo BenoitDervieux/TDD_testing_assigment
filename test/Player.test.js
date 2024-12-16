@@ -50,14 +50,15 @@ test("The player has a strategy and throws error when invalid strategy", () => {
 
 test("The player can hit()", () => {
     const playerStub = new PlayerStub();
-    const card = new Card();
-    card.setSuit('Hearts');
-    card.setRank('Queen');
-    playerStub.getHand().addCard(card);
+    const mockCard = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(10), // Mock the card's value
+    };
+    playerStub.getHand().addCard(mockCard);
     expect(playerStub.getHand().getCards().length).toBe(1);
     playerStub.hit();
     expect(playerStub.getHand().getCards().length).toBe(2);
-    
 })
 
 test("The player have defined states while playing", () => {

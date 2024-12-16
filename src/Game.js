@@ -26,7 +26,7 @@ class Game {
     }
 
     stringDisplay(string) {
-      console.log(`\n${string}`)
+      //console.log(`\n${string}`)
     }
 
     start(automatic = false) {
@@ -38,7 +38,6 @@ class Game {
         switch(p) {
           case "":
             p = prompt("Enter your choice start menu: ")
-            console.log("On console log le p" + p)
             if (p !== "1") return
           case "1":
             if (automatic === false) {
@@ -147,7 +146,6 @@ class Game {
   distributeToDealer(dealer) {
     while (dealer.getHand().getValue() < 17) {
       const card = dealer.getDeck().draw_card();
-      console.log("Dans distribute to dealer")
       this.stringDisplay(`Dealer gets ${card.getStringRepresentation()}`)
       dealer.getHand().addCard(card);
     }
