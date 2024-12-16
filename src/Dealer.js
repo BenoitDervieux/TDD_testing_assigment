@@ -6,6 +6,9 @@ class Dealer extends Player {
     #deck;
     constructor(hand, deck) {
         super(hand);
+        if (!deck) {
+            throw new Error('No deck provided');
+        }
         this.#deck = deck
     };
 

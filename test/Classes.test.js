@@ -7,7 +7,7 @@ const Hand = require('../src/Hand');
 
 test("The classes exists", () => {
     expect(new Player()).toBeInstanceOf(Player);
-    expect(new Dealer()).toBeInstanceOf(Dealer);
+    expect(new Dealer(new Hand(), new Deck())).toBeInstanceOf(Dealer);
     expect(new Card()).toBeInstanceOf(Card);
     expect(new Deck()).toBeInstanceOf(Deck);
     expect(new Game()).toBeInstanceOf(Game);
