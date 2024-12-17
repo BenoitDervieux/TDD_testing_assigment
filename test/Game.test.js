@@ -103,10 +103,13 @@ test("The Game distributes card to players", () => {
 })
 
 test("The game distributes card to the dealer", () => {
-    const hand = new Hand();
-    const deck = new Deck();
-    const dealer = new Dealer(hand, deck);
-    const game = new Game(dealer);
-    game.distributeToDealer(dealer);
-    expect(dealer.getHand().getCards().length).toBe(2);
+    for (let i = 0; i < 10; i++) {
+        const hand = new Hand();
+        const deck = new Deck();
+        const dealer = new Dealer(hand, deck);
+        const game = new Game(dealer);
+        game.distributeTwoCardsToDealer(dealer);
+        expect(dealer.getHand().getCards().length).toBe(2);
+    }
+    
 })
