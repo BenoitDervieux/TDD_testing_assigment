@@ -93,7 +93,9 @@ test("The Game distributes card to players", () => {
     const dealer = new Dealer(hand, deck);
     const game = new Game(dealer);
     const player1 = new Player(new Hand());
+    player1.setState(State_types.PLAYING);
     const player2 = new Player(new Hand());
+    player2.setState(State_types.PLAYING);
     const arrayPlayers = [player1, player2];
     game.distributeToPlayers(arrayPlayers, dealer);
     expect(player1.getHand().getCards().length).toBe(2);

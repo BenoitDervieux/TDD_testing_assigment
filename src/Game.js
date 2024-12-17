@@ -37,7 +37,7 @@ class Game {
     }
 
     stringDisplay(string) {
-      // console.log(`\n${string}`)
+       // console.log(`\n${string}`)
     }
 
     start(automatic = false) {
