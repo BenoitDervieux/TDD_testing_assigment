@@ -81,7 +81,7 @@ class Game {
       this.stringDisplay(`There are ${number} players`);
       this.createPlayer(number);
       this.distributeToPlayers(this._players, this._dealer);
-      this.distributeTwoCardsToDealer();
+      this.distributeTwoCardsToDealer(this._dealer);
       this.play(automatic);
     }
 
@@ -151,9 +151,9 @@ class Game {
       }
     }
 
-    distributeTwoCardsToDealer() {
+    distributeTwoCardsToDealer(dealer) {
       for (let i = 0; i < 2; i++) {
-        const card = this._dealer.getDeck().draw_card();
+        const card = dealer.getDeck().draw_card();
         this.stringDisplay(`Dealer gets ${card.getStringRepresentation()}`)
         this._dealer.getHand().addCard(card);
       }
