@@ -3,15 +3,17 @@ const Player = require('../src/Player');
 const prompt = require('prompt-sync')({ sigint: true});
 const States = require('../src/States_types');
 const Hand = require('../src/Hand');
+const Deck = require('../src/Deck');
 
 class Game {
   _dealer;
   _players = [];
-    constructor(dealer) {
+    constructor(dealer, promptFunction = null) {
       if (!dealer) {
         throw new Error('No dealer provided')
       }
       this._dealer = dealer
+      this.prompt = promptFunction || (() => null);
     }
 
     getDealer() {
@@ -35,11 +37,12 @@ class Game {
     }
 
     stringDisplay(string) {
-      //console.log(`\n${string}`)
+      // console.log(`\n${string}`)
     }
 
     start(automatic = false) {
       let p = "";
+      let r = ""
       p = automatic ? '1': p;
       while (p !== 'q') {
         const menu_string = "Welcome to the black Jack Game\n1 - Start the game\nq - Exit"
@@ -51,14 +54,15 @@ class Game {
           case "1":
             if (automatic === false) {
               this.initGame();
-              p ="";
               this._players =[]
-              this._dealer = new Dealer();
+              p ="";
+              break
             } else {
               this.initGame(automatic);
               p = 'q';
             }
           case "q":
+            this.gameExit()
             // return
           default:
             this.stringDisplay('I did not understand the request');
@@ -68,11 +72,15 @@ class Game {
       }
     }
 
+    gameExit() {
+      // process.exit();
+    }
+
     initGame(automatic = false) {
       let number = this.getNumberOfPlayer(automatic);
       this.stringDisplay(`There are ${number} players`);
       this.createPlayer(number);
-      this.distributeToPlayers();
+      this.distributeToPlayers(this._players, this._dealer);
       this.distributeTwoCardsToDealer();
       this.play(automatic);
     }
@@ -131,13 +139,13 @@ class Game {
       return number;
     }
 
-    distributeToPlayers() {
+    distributeToPlayers(players, dealer) {
       for (let i = 0; i < 2; i++) {
-        for (let j = 0; j < this._players.length; j++) {
-          const card = this._dealer.getDeck().draw_card();
+        for (let j = 0; j < players.length; j++) {
+          const card = dealer.getDeck().draw_card();
           this.stringDisplay(`Player ${j} gets ${card.getStringRepresentation()}`)
-          if (this._players[j].getState() === States.PLAYING) {
-            this._players[j].getHand().addCard(card);
+          if (players[j].getState() === States.PLAYING) {
+            players[j].getHand().addCard(card);
           }
         }
       }

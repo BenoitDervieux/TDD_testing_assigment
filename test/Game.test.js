@@ -3,6 +3,7 @@ const Dealer = require('../src/Dealer');
 const Hand = require('../src/Hand');
 const Deck = require('../src/Deck');
 const State_types = require('../src/States_types');
+const Player = require('../src/Player');
 
 test("The Game throws an error if no dealer is provided", () => {
     expect(() => new Game()).toThrow('No dealer provided');
@@ -86,3 +87,15 @@ test("The Game celebrates its winner", () => {
     expect(spy_celebrate).toHaveBeenCalled();
 })
 
+test("The Game distributes card to players", () => {
+    const hand = new Hand();
+    const deck = new Deck();
+    const dealer = new Dealer(hand, deck);
+    const game = new Game(dealer);
+    const player1 = new Player(new Hand());
+    const player2 = new Player(new Hand());
+    const arrayPlayers = [player1, player2];
+    game.distributeToPlayers(arrayPlayers, dealer);
+    expect(player1.getHand().getCards().length).toBe(2);
+    expect(player2.getHand().getCards().length).toBe(2);
+})
