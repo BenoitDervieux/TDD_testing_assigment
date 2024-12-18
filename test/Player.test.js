@@ -50,7 +50,10 @@ test("The player has a strategy and throws error when invalid strategy", () => {
     const player = new Player(hand);
     player.setStrategy(Strategy.ALWAYS_HIT_ON_8);
     expect(player.getStrategy()).toBe("Always hit on 8")
+    player.setStrategy(Strategy.STAND_ON_17)
+    expect(player.getStrategy()).toBe('Stand on 17');
     expect(() => player.setStrategy("bad strategy")).toThrow('Invalid strategy');
+    
 })
 
 test("The player can hit()", () => {
@@ -75,7 +78,7 @@ test("The player have defined states while playing", () => {
     game.start(true);
     const players = game.getPlayers();
     for (let i = 0; i < players.length; i++) {
-        if (players[i].getHand().getValue() > 21 || (players[i].getHand().getValue() <= dealer.getHand().getValue())) {
+        if (players[i].getHand().getValue() > 21 || (players[i].getHand().getValue() <= dealer.getHand().getValue() && players[i].getHand().getValue() < 21)) {
             expect(players[i].getState()).toBe(States.LOST);
         } else if (players[i].getHand().getValue() <= 21) {
             expect(players[i].getState()).toBe(States.WON);

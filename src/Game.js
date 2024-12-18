@@ -178,7 +178,7 @@ class Game {
       if ((players[i].getState() !== State_types.LOST) && (players[i].getHand().getValue() > dealer.getHand().getValue())) {
         players[i].setState(States.WON)
         winners.push(players[i])
-      } else if (dealer.getState() === State_types.BUSTED && !(players[i].getState() === State_types.LOST)) {
+      } else if (dealer.getState() === State_types.BUSTED && players[i].getState() !== State_types.LOST) {
         players[i].setState(States.WON)
         winners.push(players[i])
       }
@@ -205,7 +205,6 @@ class Game {
       } 
     }
   }
-
 
   celebrate(winner) {
     if (winner.length === 0) {
