@@ -197,3 +197,41 @@ test("The game set up busted state if the dealer has more than 21 points", () =>
     expect(dealer.getState()).toBe(State_types.BUSTED)
 })
 
+test("The game recognizes that there are no winners if all the players have lost", () => {
+    const hand = new Hand();
+    const deck = new Deck();
+    const dealer = new Dealer(hand, deck);
+    const game = new Game(dealer);
+    const mockCard1 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(10), // Mock the card's value
+    };
+    const mockCard2 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(10), // Mock the card's value
+    };
+    hand.addCard(mockCard1)
+    hand.addCard(mockCard2)
+    const hand2 = new Hand()
+    const player = new Player(hand2)
+    const mockCard3 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(11), // Mock the card's value
+    };
+    const mockCard4 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(11), // Mock the card's value
+    };
+    hand2.addCard(mockCard3)
+    hand2.addCard(mockCard4)
+    game.adjustState(player)
+    game.adjustState(dealer)
+    const winner = game.getWinners(player, dealer)
+    expect(winner).toBe(false)
+
+
+})
