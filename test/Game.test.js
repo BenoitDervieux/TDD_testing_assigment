@@ -231,7 +231,5 @@ test("The game recognizes that there are no winners if all the players have lost
     game.adjustState(player)
     game.adjustState(dealer)
     const winner = game.getWinners(player, dealer)
-    expect(winner).toBe(false)
-
-
+    expect(winner).toHaveLength(0)
 })
