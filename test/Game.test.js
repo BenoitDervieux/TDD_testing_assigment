@@ -102,7 +102,7 @@ test("The Game distributes card to players", () => {
     expect(player2.getHand().getCards().length).toBe(2);
 })
 
-test("The game distributes card to the dealer", () => {
+test("The game distributes card to the dealer initially", () => {
     for (let i = 0; i < 10; i++) {
         const hand = new Hand();
         const deck = new Deck();
@@ -111,5 +111,89 @@ test("The game distributes card to the dealer", () => {
         game.distributeTwoCardsToDealer(dealer);
         expect(dealer.getHand().getCards().length).toBe(2);
     }
-    
 })
+
+test("The game distributes card to the dealer if his initial two cards are less than 17", () => {
+    const hand = new Hand();
+    const deck = new Deck();
+    const dealer = new Dealer(hand, deck);
+    const game = new Game(dealer);
+    const mockCard1 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(11), // Mock the card's value
+    };
+    const mockCard2 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(9), // Mock the card's value
+    };
+    dealer.getHand().addCard(mockCard1)
+    dealer.getHand().addCard(mockCard2)
+    game.distributeToDealer(dealer)
+    expect(dealer.getHand().getCards().length).toBe(2)
+
+    const hand2 = new Hand();
+    const deck2 = new Deck();
+    const dealer2 = new Dealer(hand2, deck2);
+    const game2 = new Game(dealer2);
+    const mockCard3 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(5), // Mock the card's value
+    };
+    const mockCard4 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(3), // Mock the card's value
+    };
+    dealer2.getHand().addCard(mockCard3)
+    dealer2.getHand().addCard(mockCard4)
+    game2.distributeToDealer(dealer2)
+    expect(dealer2.getHand().getCards().length > 2).toBe(true)
+})
+
+test("The game set up lost state if the player has more than 21 points", () => {
+    const hand = new Hand();
+    const deck = new Deck();
+    const dealer = new Dealer(hand, deck);
+    const game = new Game(dealer);
+    const hand2 = new Hand()
+    const player = new Player(hand2)
+    const mockCard1 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(11), // Mock the card's value
+    };
+    const mockCard2 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(11), // Mock the card's value
+    };
+    hand2.addCard(mockCard1)
+    hand2.addCard(mockCard2)
+    game.adjustState(player)
+    expect(player.getState()).toBe(State_types.LOST)
+})
+
+test("The game set up busted state if the dealer has more than 21 points", () => {
+    const hand = new Hand();
+    const deck = new Deck();
+    const dealer = new Dealer(hand, deck);
+    const game = new Game(dealer);
+    const mockCard1 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(11), // Mock the card's value
+    };
+    const mockCard2 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(11), // Mock the card's value
+    };
+    hand.addCard(mockCard1)
+    hand.addCard(mockCard2)
+    game.adjustState(dealer)
+    expect(dealer.getState()).toBe(State_types.BUSTED)
+})
+
