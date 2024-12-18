@@ -233,3 +233,78 @@ test("The game recognizes that there are no winners if all the players have lost
     const winner = game.getWinners(player, dealer)
     expect(winner).toHaveLength(0)
 })
+
+test("The game recognizes that there are no winners if all the players have a lower score than the dealer", () => {
+    const hand = new Hand();
+    const deck = new Deck();
+    const dealer = new Dealer(hand, deck);
+    const game = new Game(dealer);
+    const mockCard1 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(10), // Mock the card's value
+    };
+    const mockCard2 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(10), // Mock the card's value
+    };
+    hand.addCard(mockCard1)
+    hand.addCard(mockCard2)
+    const hand2 = new Hand()
+    const player = new Player(hand2)
+    const mockCard3 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(10), // Mock the card's value
+    };
+    const mockCard4 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(9), // Mock the card's value
+    };
+    hand2.addCard(mockCard3)
+    hand2.addCard(mockCard4)
+    game.adjustState(player)
+    game.adjustState(dealer)
+    const winner = game.getWinners(player, dealer)
+    expect(winner).toHaveLength(0)
+})
+
+test("The game recognizes that there are 1 winner if the player have a higher score than the dealer", () => {
+    const hand = new Hand();
+    const deck = new Deck();
+    const dealer = new Dealer(hand, deck);
+    const game = new Game(dealer);
+    const mockCard1 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(10), // Mock the card's value
+    };
+    const mockCard2 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(9), // Mock the card's value
+    };
+    hand.addCard(mockCard1)
+    hand.addCard(mockCard2)
+    const hand2 = new Hand()
+    const player = new Player(hand2)
+    const mockCard3 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(10), // Mock the card's value
+    };
+    const mockCard4 = {
+        setSuit: jest.fn(),
+        setRank: jest.fn(),
+        getValue: jest.fn().mockReturnValue(10), // Mock the card's value
+    };
+    hand2.addCard(mockCard3)
+    hand2.addCard(mockCard4)
+    game.adjustState(dealer)
+    dealer.setState(State_types.PLAYING)
+    player.setState(State_types.STOOD)
+    const winner = game.getWinners(player, dealer)
+    expect(winner).toHaveLength(1)
+})

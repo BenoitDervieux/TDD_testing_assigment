@@ -4,6 +4,7 @@ const prompt = require('prompt-sync')({ sigint: true});
 const States = require('../src/States_types');
 const Hand = require('../src/Hand');
 const Deck = require('../src/Deck');
+const State_types = require('../src/States_types');
 
 class Game {
   _dealer;
@@ -170,7 +171,7 @@ class Game {
   getWinners(players, dealer) {
     const winners = []
     for (let i = 0; i < players.length; i++) {
-      if (players[i].getState() === States.STOOD && (players[i].getHand().getValue() > dealer.getHand().getValue() || dealer.getState() === States.LOST)) {
+      if (players[i].getHand().getValue() > dealer.getHand().getValue() || (dealer.getState() === States.BUSTED && !(player.getState() === State_types.LOST))) {
         players[i].setState(States.WON)
         winners.push(players[i]);
       } else {
