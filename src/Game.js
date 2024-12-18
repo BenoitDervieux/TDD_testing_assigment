@@ -169,13 +169,18 @@ class Game {
   }
 
   getWinners(players, dealer) {
-    const winners = []
+    let winners = []
     for (let i = 0; i < players.length; i++) {
-      if (players[i].getHand().getValue() > dealer.getHand().getValue() || (dealer.getState() === States.BUSTED && !(player.getState() === State_types.LOST))) {
-        players[i].setState(States.WON)
-        winners.push(players[i]);
-      } else {
+      if (players[i].getHand().getValue() > 21) {
         players[i].setState(States.LOST)
+      }
+
+      if ((players[i].getState() !== State_types.LOST) && (players[i].getHand().getValue() > dealer.getHand().getValue())) {
+        players[i].setState(States.WON)
+        winners.push(players[i])
+      } else if (dealer.getState() === State_types.BUSTED && !(players[i].getState() === State_types.LOST)) {
+        players[i].setState(States.WON)
+        winners.push(players[i])
       }
     }
     return winners;

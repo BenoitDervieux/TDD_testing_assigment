@@ -271,11 +271,9 @@ test("The game recognizes that there are no winners if all the players have a lo
     expect(winner).toHaveLength(0)
 })
 
-test("The game recognizes that there are 1 winner if the player have a higher score than the dealer", () => {
+test("The game recognizes that there is 1 winner if the player have a higher score than the dealer", () => {
     const hand = new Hand();
     const deck = new Deck();
-    const dealer = new Dealer(hand, deck);
-    const game = new Game(dealer);
     const mockCard1 = {
         setSuit: jest.fn(),
         setRank: jest.fn(),
@@ -288,8 +286,10 @@ test("The game recognizes that there are 1 winner if the player have a higher sc
     };
     hand.addCard(mockCard1)
     hand.addCard(mockCard2)
+    const dealer = new Dealer(hand, deck);
+    const game = new Game(dealer);
+    // Giving value to the player
     const hand2 = new Hand()
-    const player = new Player(hand2)
     const mockCard3 = {
         setSuit: jest.fn(),
         setRank: jest.fn(),
@@ -302,9 +302,13 @@ test("The game recognizes that there are 1 winner if the player have a higher sc
     };
     hand2.addCard(mockCard3)
     hand2.addCard(mockCard4)
-    game.adjustState(dealer)
+    const player = new Player(hand2)
+    let players = []
+    players.push(player)
     dealer.setState(State_types.PLAYING)
     player.setState(State_types.STOOD)
-    const winner = game.getWinners(player, dealer)
-    expect(winner).toHaveLength(1)
+    players = game.getWinners(players, dealer)
+    expect(player.getHand().getValue()).toBe(20)
+    expect(dealer.getHand().getValue()).toBe(19)
+    expect(players).toHaveLength(1)
 })
