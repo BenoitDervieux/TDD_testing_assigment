@@ -171,10 +171,9 @@ class Game {
   getWinners(players, dealer) {
     let winners = []
     for (let i = 0; i < players.length; i++) {
-      if (players[i].getHand().getValue() > 21) {
+      if (players[i].getHand().getValue() > 21 || ((dealer.getHand().getValue() < 22) && (dealer.getHand().getValue() > players[i].getHand().getValue()))) {
         players[i].setState(States.LOST)
       }
-
       if ((players[i].getState() !== State_types.LOST) && (players[i].getHand().getValue() > dealer.getHand().getValue())) {
         players[i].setState(States.WON)
         winners.push(players[i])
